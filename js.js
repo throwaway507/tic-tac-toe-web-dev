@@ -1,9 +1,5 @@
 const choices = ['X', 'O']
-
-function firstMove(){
-    let index = Math.floor(Math.random() * choices.length);
-    return choices[index];
-}
+const board = [['', '', ''], ['', '', ''], ['', '', '']];
 
 function fillBoard(field, board){
     switch (field){
@@ -17,8 +13,6 @@ function fillBoard(field, board){
         case "eight": board[2][1] = 'X'; break;
         case "nine": board[2][2] = 'X'; break;
     }
-
-        
     
 }
 
@@ -47,15 +41,15 @@ function Draw(board){
 function checkWinner(board, over){
     if (isOver(board) !== null){
         if (isOver(board) === "O"){
-            document.getElementById("result").innerHTML = "You lost";
+            document.getElementById("result").innerHTML = "Przegrales";
         }
 
         else if (isOver(board) === "X"){
-            document.getElementById("result").innerHTML = "You won";
+            document.getElementById("result").innerHTML = "Wygrales";
         }
         
         else {
-            document.getElementById("result").innerHTML = "Tie";
+            document.getElementById("result").innerHTML = "Remis";
         }
         over = true;
         return over;
@@ -180,6 +174,7 @@ function getBestMove(board){
     board[bestMove1][bestMove2] = "O";
     boardToHTML(bestMove1, bestMove2);
 }  
+
 function game(field, board, over){
     over = checkWinner(board);
     if (!over){
@@ -193,9 +188,8 @@ function game(field, board, over){
     }
 }
 
-
 function main(){
-    var board = [['', '', ''], ['', '', ''], ['', '', '']];
+    
     getBestMove(board);
     document.getElementById("one").addEventListener("click", () => game("one", board) );
     document.getElementById("two").addEventListener("click", () => game("two", board) );
